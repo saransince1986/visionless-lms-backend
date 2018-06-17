@@ -1,0 +1,60 @@
+{
+  "name": "bencaleth-lms-backend",
+  "version": "1.0.0",
+  "description": "LMS Backend",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "LMS"
+  ],
+  "author": "Cesar Bonilla",
+  "license": "ISC",
+  "devDependencies": {
+    "babel-cli": "^6.24.1",
+    "babel-core": "~6.24.1",
+    "babel-eslint": "^7.2.3",
+    "babel-helpers": "^6.24.1",
+    "babel-jest": "~19.0.0",
+    "babel-plugin-transform-async-to-generator": "^6.24.1",
+    "babel-plugin-transform-es2015-modules-commonjs": "^6.24.1",
+    "babel-plugin-transform-flow-strip-types": "^6.22.0",
+    "babel-plugin-transform-runtime": "^6.23.0",
+    "babel-preset-stage-3": "~6.24.1",
+    "babel-register": "^6.24.1",
+    "eslint": "^4.19.1",
+    "eslint-config-airbnb-base": "^11.2.0",
+    "eslint-import-resolver-node": "^0.3.1",
+    "eslint-plugin-flowtype": "^2.35.0",
+    "eslint-plugin-import": "^2.7.0",
+    "flow-bin": "^0.50.0",
+    "jest": "~19.0.2",
+    "lint-staged": "^4.0.1",
+    "pre-commit": "^1.2.2",
+    "prettier-eslint": "^6.4.2",
+    "sequelize-cli": "^4.0.0"
+  },
+  "dependencies": {
+    "express": "^4.16.3"
+  },
+  "jest": {
+    "testEnvironment": "node",
+    "moduleFileExtensions": [
+      "js"
+    ],
+    "coverageDirectory": "coverage",
+    "collectCoverageFrom": [
+      "src/domain/**/*.js",
+      "src/util/**/*.js",
+      "!src/**/index.js"
+    ]
+  },
+  "lint-staged": {
+    "*.js": [
+      "lint",
+      "git add"
+    ]
+  },
+  "pre-commit": "lint:staged"
+}

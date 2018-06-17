@@ -1,0 +1,7 @@
+#Config files
+src/config/sequelize.js
+#NPM Modules
+/node_modules
+#Compiled Project
+/dist
+
