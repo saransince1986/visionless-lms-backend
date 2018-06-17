@@ -4,7 +4,9 @@
   "description": "LMS Backend",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "migrations": "sequelize db:migrate --config=src/config/sequelize.json --migrations-path=src/migrations",
+    "create-db": "sequelize db:create --config=src/config/sequelize.json"
   },
   "keywords": [
     "LMS"

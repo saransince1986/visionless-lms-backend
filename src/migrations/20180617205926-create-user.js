@@ -14,13 +14,6 @@ module.exports = {
       phoneNumber: {
         type: Sequelize.STRING
       },
-      roleId: {
-        type: Sequelize.INTEGER,
-        references: {
-          model: 'role',
-          key: 'id'
-        }
-      },
       createdAt: {
         allowNull: false,
         type: Sequelize.DATE
