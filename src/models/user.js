@@ -9,7 +9,7 @@ module.exports = (sequelize, DataTypes) => {
     lastName: DataTypes.STRING,
     secondLastName: DataTypes.STRING,
     idNumber: DataTypes.STRING
-  }, {});
+  });
   user.associate = function(models) {
     user.belongsTo(models.role);
   };
