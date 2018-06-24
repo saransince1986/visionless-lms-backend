@@ -9,13 +9,15 @@ module.exports = {
         type: Sequelize.INTEGER
       },
       email: {
-        type: Sequelize.STRING
+        type: Sequelize.STRING,
+        unique: true
       },
       phoneNumber: {
         type: Sequelize.STRING
       },
       authId: {
-        type: Sequelize.STRING
+        type: Sequelize.STRING,
+        unique: true
       },
       firstName: {
         type: Sequelize.STRING
@@ -30,7 +32,8 @@ module.exports = {
         type: Sequelize.STRING
       },
       idNumber: {
-        type: Sequelize.STRING
+        type: Sequelize.STRING,
+        unique: true
       },
       createdAt: {
         allowNull: false,
