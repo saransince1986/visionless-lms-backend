@@ -14,6 +14,24 @@ module.exports = {
       phoneNumber: {
         type: Sequelize.STRING
       },
+      authId: {
+        type: Sequelize.STRING
+      },
+      firstName: {
+        type: Sequelize.STRING
+      },
+      midName: {
+        type: Sequelize.STRING
+      },
+      lastName: {
+        type: Sequelize.STRING
+      },
+      secondLastName: {
+        type: Sequelize.STRING
+      },
+      idNumber: {
+        type: Sequelize.STRING
+      },
       createdAt: {
         allowNull: false,
         type: Sequelize.DATE
