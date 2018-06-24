@@ -5,8 +5,14 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
+    "lint": "eslint . --fix",
+    "lint:staged": "lint-staged",
     "migrations": "sequelize db:migrate --config=src/config/sequelize.json --migrations-path=src/migrations",
-    "create-db": "sequelize db:create --config=src/config/sequelize.json"
+    "create-db": "sequelize db:create --config=src/config/sequelize.json",
+    "build": "babel src --out-dir dist --source-maps inline --copy-files",
+    "prestart": "npm run build",
+    "start": "node ./dist/server.js",
+    "migrations-prod": "sequelize db:migrate --config dist/config/sequelize.json --migrations-path=dist/migrations"
   },
   "keywords": [
     "LMS"
@@ -21,25 +27,26 @@
     "babel-jest": "~19.0.0",
     "babel-plugin-transform-async-to-generator": "^6.24.1",
     "babel-plugin-transform-es2015-modules-commonjs": "^6.24.1",
-    "babel-plugin-transform-flow-strip-types": "^6.22.0",
     "babel-plugin-transform-runtime": "^6.23.0",
     "babel-preset-stage-3": "~6.24.1",
     "babel-register": "^6.24.1",
     "eslint": "^4.19.1",
     "eslint-config-airbnb-base": "^11.2.0",
     "eslint-import-resolver-node": "^0.3.1",
-    "eslint-plugin-flowtype": "^2.35.0",
     "eslint-plugin-import": "^2.7.0",
-    "flow-bin": "^0.50.0",
     "jest": "~19.0.2",
     "lint-staged": "^4.0.1",
     "pre-commit": "^1.2.2",
     "prettier-eslint": "^6.4.2",
-    "sequelize-cli": "^4.0.0"
+    "sequelize-cli": "^4.0.0",
+    "chai": "^4.1.0"
   },
   "dependencies": {
     "awilix": "^3.0.8",
+    "babel-runtime": "^6.23.0",
+    "body-parser": "^1.18.3",
     "express": "^4.16.3",
+    "morgan": "^1.9.0",
     "pg": "^7.4.3",
     "sequelize": "^4.37.10"
   },
