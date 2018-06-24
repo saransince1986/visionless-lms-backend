@@ -1,5 +1,5 @@
 #Config files
-src/config/sequelize.json
+src/config/sequelize.js
 
 #NPM Modules
 /node_modules
