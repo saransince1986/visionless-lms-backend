@@ -15,6 +15,15 @@ export default class RolesRequestHandler {
     return role;
   }
 
+  async getRoleByName(roleName) {
+    const role = await this.roleModel.findOne({
+      where: {
+        roleName,
+      },
+    });
+    return role;
+  }
+
   async getAllRoles() {
     const roles = await this.roleModel.findAll();
     return roles;
@@ -27,5 +36,14 @@ export default class RolesRequestHandler {
       },
     });
     return updatedRole;
+  }
+
+  async deleteRoleById({ roleId }) {
+    await this.roleModel.destroy({
+      where: {
+        roleId,
+      },
+    });
+    return true;
   }
 }

@@ -1,7 +1,9 @@
 import express from 'express';
+import expressJoi from 'express-joi-validator';
 
 export default function ({
   rolesRequestHandler,
+  rolesSchemaValidator,
 }) {
   const router = express.Router();
   router.get('/', async (req, res) => {
@@ -23,7 +25,17 @@ export default function ({
       res.send([]);
     }
   });
-  router.post('/', async (req, res) => {
+  router.delete('/:roleId', async (req, res) => {
+    const { roleId } = req.params;
+    const role = await rolesRequestHandler.getRoleById({ roleId });
+    if (role) {
+      res.send(role);
+    } else {
+      res.statusCode = 404;
+      res.send([]);
+    }
+  });
+  router.post('/', expressJoi(rolesSchemaValidator.post), async (req, res) => {
     try {
       let { roleName } = req.body;
       roleName = roleName.toLowerCase();
