@@ -25,4 +25,12 @@ container.loadModules([`${__dirname}/../routes/!(index).js`], {
   },
 });
 
+container.loadModules([`${__dirname}/../domain/joi-validators/!(index).js`], {
+  formatName: (name) => `${name}SchemaValidator`,
+  resolverOptions: {
+    lifetime: Lifetime.SINGLETON,
+    register: asFunction,
+  },
+});
+
 export default container;
