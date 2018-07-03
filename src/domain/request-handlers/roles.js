@@ -1,49 +1,45 @@
 export default class RolesRequestHandler {
   constructor({
     roleModel,
+    rolesService,
   }) {
     this.roleModel = roleModel;
+    this.rolesService = rolesService;
   }
 
-  async createRole({ roleName }) {
-    const role = await this.roleModel.create({ roleName });
-    return role;
+  createRole({ roleName }) {
+    return this.rolesService.createRole({ roleName });
   }
 
-  async getRoleById({ roleId }) {
-    const role = await this.roleModel.findById(roleId);
-    return role;
+  getRoleById({ roleId }) {
+    return this.roleModel.findById(roleId);
   }
 
-  async getRoleByName(roleName) {
-    const role = await this.roleModel.findOne({
+  getRoleByName(roleName) {
+    return this.roleModel.findOne({
       where: {
         roleName,
       },
     });
-    return role;
   }
 
-  async getAllRoles() {
-    const roles = await this.roleModel.findAll();
-    return roles;
+  getAllRoles() {
+    return this.roleModel.findAll();
   }
 
-  async updateRole(roleId, role) {
-    const updatedRole = await this.roleModel.update(role, {
+  updateRole(roleId, role) {
+    return this.roleModel.update(role, {
       where: {
         id: roleId,
       },
     });
-    return updatedRole;
   }
 
-  async deleteRoleById({ roleId }) {
-    await this.roleModel.destroy({
+  deleteRoleById({ roleId }) {
+    return this.roleModel.destroy({
       where: {
-        roleId,
+        id: roleId,
       },
     });
-    return true;
   }
 }

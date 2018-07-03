@@ -1,31 +1,35 @@
+import { isEmpty } from 'lodash';
+
 export default class UsersRequestHandler {
   constructor({
-    userModel,
+    usersService,
+    rolesService,
   }) {
-    this.userModel = userModel;
+    this.usersService = usersService;
+    this.rolesService = rolesService;
   }
 
-  async createUser({ roleName }) {
-    const role = await this.userModel.create({ roleName });
-    return role;
+  async createUser(data) {
+    const roleName = data.role;
+    const userData = Object.assign({}, data);
+    const role = await this.rolesService.getRoleByName(roleName);
+    if (isEmpty(role)) {
+      throw new Error(`Role "${roleName}" does not exists`);
+    }
+    userData.role = role;
+    return this.usersService.createUser(userData);
   }
 
-  async getUserById({ roleId }) {
-    const role = await this.userModel.findById(roleId);
-    return role;
+  getUserById({ userId }) {
+    try {
+      return this.usersService.getUserById(userId);
+    } catch (err) {
+      console.error(err);
+      throw err;
+    }
   }
 
-  async getAllUsers() {
-    const roles = await this.userModel.findAll();
-    return roles;
-  }
-
-  async updateRole(userId, user) {
-    const updatedUser = await this.userModel.update(user, {
-      where: {
-        id: userId,
-      },
-    });
-    return updatedUser;
+  getAllUsers() {
+    return this.usersService.getAllUsers();
   }
 }
