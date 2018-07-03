@@ -1,11 +1,12 @@
 import express from 'express';
 import expressJoi from 'express-joi-validator';
 
-export default async function ({
+export default function ({
   usersRequestHandler,
   usersSchemaValidator,
 }) {
   const router = express.Router();
+
   router.get('/', async (req, res) => {
     const users = await usersRequestHandler.getAllUsers();
     if (users) {
@@ -27,11 +28,11 @@ export default async function ({
   });
   router.post('/', expressJoi(usersSchemaValidator.post), async (req, res) => {
     try {
-      const role = await usersRequestHandler.createUser(req.body);
-      res.send(role);
+      const user = await usersRequestHandler.createUser(req.body);
+      res.send(user);
     } catch (err) {
       res.statusCode = 500;
-      res.send(err);
+      res.send(err.stack);
     }
   });
   return router;
