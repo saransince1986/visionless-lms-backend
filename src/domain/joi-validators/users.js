@@ -1,14 +1,14 @@
 import Joi from 'joi';
 
-async function getValidRolesNames(rolesModel) {
-  const validRoles = await rolesModel.findAll();
+async function getValidRolesNames(roleModel) {
+  const validRoles = await roleModel.findAll();
   return validRoles.map((role) => role.roleName);
 }
 
 export default async ({
-  rolesModel,
+  roleModel,
 }) => {
-  const validRoles = await getValidRolesNames(rolesModel);
+  const validRoles = await getValidRolesNames(roleModel);
   const userSchema = {};
   userSchema.post = {
     body: {
