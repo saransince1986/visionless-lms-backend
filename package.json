@@ -7,12 +7,12 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "lint": "eslint . --fix",
     "lint:staged": "lint-staged",
-    "migrations": "sequelize db:migrate --config=src/config/sequelize.json --migrations-path=src/migrations",
-    "create-db": "sequelize db:create --config=src/config/sequelize.json",
+    "migrations": "sequelize db:migrate --config=src/config/sequelize.js --migrations-path=src/migrations",
+    "create-db": "sequelize db:create --config=src/config/sequelize.js",
     "build": "babel src --out-dir dist --source-maps inline --copy-files",
     "prestart": "npm run build",
     "start": "node ./dist/server.js",
-    "migrations-prod": "sequelize db:migrate --config dist/config/sequelize.json --migrations-path=dist/migrations"
+    "migrations-prod": "sequelize db:migrate --config dist/config/sequelize.js --migrations-path=dist/migrations"
   },
   "keywords": [
     "LMS"
@@ -48,6 +48,7 @@
     "express": "^4.16.3",
     "express-joi-validator": "^2.0.0",
     "joi": "^13.4.0",
+    "lodash": "^4.17.10",
     "morgan": "^1.9.0",
     "pg": "^7.4.3",
     "sequelize": "^4.37.10"
