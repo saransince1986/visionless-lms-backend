@@ -5,6 +5,7 @@ module.exports = (sequelize, DataTypes) => {
   });
   role.associate = function(models){
     role.hasMany(models.user);
+    role.belongsToMany(models.privilige, { through: 'rolesPrivileges' });
   };
   return role;
 };
