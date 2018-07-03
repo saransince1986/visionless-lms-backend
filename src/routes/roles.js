@@ -27,13 +27,8 @@ export default function ({
   });
   router.delete('/:roleId', async (req, res) => {
     const { roleId } = req.params;
-    const role = await rolesRequestHandler.getRoleById({ roleId });
-    if (role) {
-      res.send(role);
-    } else {
-      res.statusCode = 404;
-      res.send([]);
-    }
+    await rolesRequestHandler.deleteRoleById({ roleId });
+    res.send('OK');
   });
   router.post('/', expressJoi(rolesSchemaValidator.post), async (req, res) => {
     try {
