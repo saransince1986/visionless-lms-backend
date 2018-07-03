@@ -23,14 +23,10 @@ sequelize
      const model = sequelize.import(path.join(__dirname, file));
      db[model.name] = model;
    });
-  const models = sequelize.models;
-  Object.keys(models)
-    .map(name => models[name])
-    .filter((model) => {
-      return model.associate;
-    })
-    .forEach((model) => {
-      model.associate(models)
+  Object.keys(db).forEach((modelName) => {
+    if (db[modelName].associate) {
+      db[modelName].associate(db);
+    }
     });
 
 db.sequelize = sequelize;
