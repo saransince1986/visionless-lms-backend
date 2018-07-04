@@ -16,13 +16,19 @@ export default function ({
     }
   });
   router.get('/:roleId', async (req, res) => {
-    const { roleId } = req.params;
-    const role = await rolesRequestHandler.getRoleById({ roleId });
-    if (role) {
-      res.send(role);
-    } else {
-      res.statusCode = 404;
-      res.send([]);
+    try {
+      const { roleId } = req.params;
+      const role = await rolesRequestHandler.getRoleById(roleId);
+      if (role) {
+        res.send(role);
+      } else {
+        res.statusCode = 404;
+        res.send([]);
+      }
+    } catch (err) {
+      console.log(err);
+      res.status = 500;
+      res.send(JSON.stringify(err.message));
     }
   });
   router.delete('/:roleId', async (req, res) => {
