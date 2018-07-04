@@ -11,8 +11,8 @@ export default class RolesRequestHandler {
     return this.rolesService.createRole({ roleName });
   }
 
-  getRoleById({ roleId }) {
-    return this.roleModel.findById(roleId);
+  getRoleById(roleId) {
+    return this.rolesService.getRoleById(roleId);
   }
 
   getRoleByName(roleName) {
