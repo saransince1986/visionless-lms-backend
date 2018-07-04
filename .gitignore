@@ -6,3 +6,5 @@ src/config/sequelize.js
 
 #Compiled Project
 /dist
+
+package-lock.json
