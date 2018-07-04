@@ -8,12 +8,7 @@ export default class UsersService {
   }
 
   createUser(data) {
-    return this.userModel.create(data, {
-      include: {
-        model: this.roleModel,
-        as: 'role',
-      },
-    });
+    return this.userModel.create(data);
   }
 
   getAllUsers() {
@@ -24,6 +19,14 @@ export default class UsersService {
     return this.userModel.findById(id, {
       include: {
         model: this.roleModel,
+      },
+    });
+  }
+
+  deleteUserById(id) {
+    return this.userModel.destroy({
+      where: {
+        id,
       },
     });
   }
