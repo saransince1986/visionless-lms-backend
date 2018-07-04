@@ -5,13 +5,16 @@ module.exports = (sequelize, DataTypes) => {
     phoneNumber: DataTypes.STRING,
     authId: DataTypes.STRING,
     firstName: DataTypes.STRING,
-    midName: DataTypes.STRING,
+    middleName: DataTypes.STRING,
     lastName: DataTypes.STRING,
     secondLastName: DataTypes.STRING,
     idNumber: DataTypes.STRING
   });
   user.associate = function(models) {
     user.belongsTo(models.role);
+    user.belongsToMany(models.disability, {
+      through: 'usersDisabilities'
+    });
   };
   return user;
 };
