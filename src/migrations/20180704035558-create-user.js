@@ -22,7 +22,7 @@ module.exports = {
       firstName: {
         type: Sequelize.STRING
       },
-      midName: {
+      middleName: {
         type: Sequelize.STRING
       },
       lastName: {
