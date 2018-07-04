@@ -16,13 +16,22 @@ export default class UsersRequestHandler {
     if (isEmpty(role)) {
       throw new Error(`Role "${roleName}" does not exists`);
     }
-    userData.role = role;
+    userData.roleId = role.id;
     return this.usersService.createUser(userData);
   }
 
-  getUserById({ userId }) {
+  getUserById(userId) {
     try {
       return this.usersService.getUserById(userId);
+    } catch (err) {
+      console.error(err);
+      throw err;
+    }
+  }
+
+  deleteUserById(userId) {
+    try {
+      return this.usersService.deleteUserById(userId);
     } catch (err) {
       console.error(err);
       throw err;
