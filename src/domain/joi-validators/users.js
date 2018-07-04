@@ -21,6 +21,7 @@ export default async ({
       secondLastName: Joi.string().max(20).required(),
       idNumber: Joi.number().min(13).max(13).required(),
       role: Joi.string().valid(validRoles),
+      disabilities: Joi.array(),
     },
   };
   return userSchema;
