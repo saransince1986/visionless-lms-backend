@@ -6,7 +6,10 @@ module.exports = (sequelize, DataTypes) => {
   course.associate = function(models) {
     course.belongsToMany(models.user, {
       through: 'enrollments'
-    })
+    });
+    course.belongsToMany(models.section, {
+      through: 'coursesSections'
+    });
   };
   return course;
 };
