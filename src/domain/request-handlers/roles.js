@@ -1,9 +1,7 @@
 export default class RolesRequestHandler {
   constructor({
-    roleModel,
     rolesService,
   }) {
-    this.roleModel = roleModel;
     this.rolesService = rolesService;
   }
 
@@ -16,30 +14,18 @@ export default class RolesRequestHandler {
   }
 
   getRoleByName(roleName) {
-    return this.roleModel.findOne({
-      where: {
-        roleName,
-      },
-    });
+    return this.rolesService.findRoleByName(roleName);
   }
 
   getAllRoles() {
-    return this.roleModel.findAll();
+    return this.rolesService.getAllRoles();
   }
 
   updateRole(roleId, role) {
-    return this.roleModel.update(role, {
-      where: {
-        id: roleId,
-      },
-    });
+    return this.rolesService.updateRole(roleId, role);
   }
 
   deleteRoleById({ roleId }) {
-    return this.roleModel.destroy({
-      where: {
-        id: roleId,
-      },
-    });
+    return this.rolesService.deleteRoleById(roleId);
   }
 }
