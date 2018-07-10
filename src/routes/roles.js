@@ -7,28 +7,17 @@ export default function ({
 }) {
   const router = express.Router();
   router.get('/', async (req, res) => {
-    const roles = await rolesRequestHandler.getAllRoles();
-    if (roles) {
-      res.send(roles);
-    } else {
-      res.statusCode = 404;
-      res.send([]);
-    }
+    const roles = await rolesRequestHandler.getAllRoles() || [];
+    res.send(roles);
   });
   router.get('/:roleId', async (req, res) => {
     try {
       const { roleId } = req.params;
-      const role = await rolesRequestHandler.getRoleById(roleId);
-      if (role) {
-        res.send(role);
-      } else {
-        res.statusCode = 404;
-        res.send([]);
-      }
+      const role = await rolesRequestHandler.getRoleById(roleId) || [];
+      res.send(role);
     } catch (err) {
       console.error(err);
-      res.status = 500;
-      res.send(JSON.stringify(err.message));
+      res.status(500).send(err.message);
     }
   });
   router.delete('/:roleId', async (req, res) => {
@@ -43,8 +32,8 @@ export default function ({
       const role = await rolesRequestHandler.createRole({ roleName });
       res.send(role);
     } catch (err) {
-      res.statusCode = 500;
-      res.send(err);
+      console.error(err);
+      res.status(500).send(err.message);
     }
   });
   return router;

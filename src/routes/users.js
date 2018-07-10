@@ -9,13 +9,8 @@ export default function ({
   const router = express.Router();
 
   router.get('/', async (req, res) => {
-    const users = await usersRequestHandler.getAllUsers();
-    if (users) {
-      res.send(users);
-    } else {
-      res.statusCode = 404;
-      res.send([]);
-    }
+    const users = await usersRequestHandler.getAllUsers() || [];
+    res.send(users);
   });
 
   router.get('/:userId', async (req, res) => {
@@ -23,8 +18,7 @@ export default function ({
     if (!isEmpty(user)) {
       res.send(user);
     } else {
-      res.statusCode = 404;
-      res.send([]);
+      res.status(404).send({});
     }
   });
 
@@ -49,8 +43,7 @@ export default function ({
       res.send(user);
     } catch (err) {
       console.error(err);
-      res.statusCode = 500;
-      res.send(err.stack);
+      res.status(500).send(err.message);
     }
   });
   return router;
