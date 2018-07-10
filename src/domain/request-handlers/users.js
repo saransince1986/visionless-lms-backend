@@ -21,21 +21,11 @@ export default class UsersRequestHandler {
   }
 
   getUserById(userId) {
-    try {
-      return this.usersManagerService.getUserById(userId);
-    } catch (err) {
-      console.error(err);
-      throw err;
-    }
+    return this.usersManagerService.getUserById(userId);
   }
 
   deleteUserById(userId) {
-    try {
-      return this.usersManagerService.deleteUserById(userId);
-    } catch (err) {
-      console.error(err);
-      throw err;
-    }
+    return this.usersManagerService.deleteUserById(userId);
   }
 
   getAllUsers() {
