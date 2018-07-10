@@ -7,8 +7,8 @@ router.get('/', (req, res) => {
   res.send('Hello World');
 });
 
-router.use('/roles', container.resolve('rolesRouter'));
-router.use('/users', container.resolve('usersRouter'));
+router.use('/api/v1/roles', container.resolve('rolesRouter'));
+router.use('/api/v1/users', container.resolve('usersRouter'));
 
 export default router;
 
