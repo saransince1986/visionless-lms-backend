@@ -26,7 +26,7 @@ export default function ({
         res.send([]);
       }
     } catch (err) {
-      console.log(err);
+      console.error(err);
       res.status = 500;
       res.send(JSON.stringify(err.message));
     }
