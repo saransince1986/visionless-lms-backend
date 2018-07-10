@@ -15,9 +15,9 @@ module.exports = (sequelize, DataTypes) => {
     user.belongsToMany(models.disability, {
       through: 'usersDisabilities'
     });
-    user.belongsToMany(models.course), {
+    user.belongsToMany(models.course, {
       through: 'enrollments',
-    }
+    });
   };
   return user;
 };
