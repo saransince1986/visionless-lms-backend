@@ -2,27 +2,27 @@ import { isEmpty } from 'lodash';
 
 export default class UsersRequestHandler {
   constructor({
-    usersService,
-    rolesService,
+    usersManagerService,
+    rolesManagerService,
   }) {
-    this.usersService = usersService;
-    this.rolesService = rolesService;
+    this.usersManagerService = usersManagerService;
+    this.rolesManagerService = rolesManagerService;
   }
 
   async createUser(data) {
     const roleName = data.role;
     const userData = Object.assign({}, data);
-    const role = await this.rolesService.getRoleByName(roleName);
+    const role = await this.rolesManagerService.getRoleByName(roleName);
     if (isEmpty(role)) {
       throw new Error(`Role "${roleName}" does not exists`);
     }
     userData.roleId = role.id;
-    return this.usersService.createUser(userData);
+    return this.usersManagerService.createUser(userData);
   }
 
   getUserById(userId) {
     try {
-      return this.usersService.getUserById(userId);
+      return this.usersManagerService.getUserById(userId);
     } catch (err) {
       console.error(err);
       throw err;
@@ -31,7 +31,7 @@ export default class UsersRequestHandler {
 
   deleteUserById(userId) {
     try {
-      return this.usersService.deleteUserById(userId);
+      return this.usersManagerService.deleteUserById(userId);
     } catch (err) {
       console.error(err);
       throw err;
@@ -39,6 +39,6 @@ export default class UsersRequestHandler {
   }
 
   getAllUsers() {
-    return this.usersService.getAllUsers();
+    return this.usersManagerService.getAllUsers();
   }
 }

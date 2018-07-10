@@ -1,4 +1,4 @@
-export default class UsersService {
+export default class UsersManagerService {
   constructor({
     userModel,
     roleModel,

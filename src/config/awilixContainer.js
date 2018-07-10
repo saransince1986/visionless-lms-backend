@@ -34,7 +34,7 @@ container.loadModules([`${__dirname}/../domain/joi-validators/!(index).js`], {
 });
 
 container.loadModules([`${__dirname}/../domain/services/*.js`], {
-  formatName: (name) => `${name}Service`,
+  formatName: (name) => `${name}ManagerService`,
   resolverOptions: {
     lifetime: Lifetime.SINGLETON,
     register: asClass,

@@ -1,4 +1,4 @@
-export default class RolesService {
+export default class RolesManagerService {
   constructor({
     roleModel,
     privilegeModel,

@@ -1,31 +1,31 @@
 export default class RolesRequestHandler {
   constructor({
-    rolesService,
+    rolesManagerService,
   }) {
-    this.rolesService = rolesService;
+    this.rolesManagerService = rolesManagerService;
   }
 
   createRole({ roleName }) {
-    return this.rolesService.createRole({ roleName });
+    return this.rolesManagerService.createRole({ roleName });
   }
 
   getRoleById(roleId) {
-    return this.rolesService.getRoleById(roleId);
+    return this.rolesManagerService.getRoleById(roleId);
   }
 
   getRoleByName(roleName) {
-    return this.rolesService.findRoleByName(roleName);
+    return this.rolesManagerService.findRoleByName(roleName);
   }
 
   getAllRoles() {
-    return this.rolesService.getAllRoles();
+    return this.rolesManagerService.getAllRoles();
   }
 
   updateRole(roleId, role) {
-    return this.rolesService.updateRole(roleId, role);
+    return this.rolesManagerService.updateRole(roleId, role);
   }
 
   deleteRoleById({ roleId }) {
-    return this.rolesService.deleteRoleById(roleId);
+    return this.rolesManagerService.deleteRoleById(roleId);
   }
 }
