@@ -12,7 +12,7 @@ export default class UsersManagerService {
   }
 
   getAllUsers() {
-    return this.userModel.findAll({ limit: 100 });
+    return this.userModel.findAll({ limit: 50 });
   }
 
   getUserById(id) {
