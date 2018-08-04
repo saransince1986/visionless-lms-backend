@@ -6,4 +6,8 @@ export default class CoursesRequestHandler {
   getAllCourses() {
     return this.coursesManagerService.getAllCourses();
   }
+
+  createCourse({ courseId, courseName }) {
+    return this.coursesManagerService.createCourse({ courseId, courseName });
+  }
 }
