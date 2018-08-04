@@ -11,7 +11,6 @@ module.exports = (sequelize, DataTypes) => {
     idNumber: DataTypes.STRING
   });
   user.associate = function(models) {
-    user.belongsTo(models.role);
     user.belongsToMany(models.disability, {
       through: 'usersDisabilities'
     });
