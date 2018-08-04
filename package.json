@@ -47,11 +47,15 @@
     "body-parser": "^1.18.3",
     "express": "^4.16.3",
     "express-joi-validator": "^2.0.0",
+    "hapi": "^17.5.3",
+    "hapi-swagger": "^9.1.1",
+    "inert": "^5.1.0",
     "joi": "^13.4.0",
     "lodash": "^4.17.10",
     "morgan": "^1.9.0",
     "pg": "^7.4.3",
-    "sequelize": "^4.37.10"
+    "sequelize": "^4.37.10",
+    "vision": "^5.3.3"
   },
   "jest": {
     "testEnvironment": "node",
