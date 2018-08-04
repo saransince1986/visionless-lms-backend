@@ -1,5 +1,3 @@
-import { isEmpty } from 'lodash';
-
 export default class UsersRequestHandler {
   constructor({
     usersManagerService,
@@ -10,14 +8,7 @@ export default class UsersRequestHandler {
   }
 
   async createUser(data) {
-    const roleName = data.role;
-    const userData = Object.assign({}, data);
-    const role = await this.rolesManagerService.getRoleByName(roleName);
-    if (isEmpty(role)) {
-      throw new Error(`Role "${roleName}" does not exists`);
-    }
-    userData.roleId = role.id;
-    return this.usersManagerService.createUser(userData);
+    return this.usersManagerService.createUser(data);
   }
 
   getUserById(userId) {
