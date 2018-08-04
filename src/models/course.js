@@ -1,7 +1,8 @@
 'use strict';
 module.exports = (sequelize, DataTypes) => {
   var course = sequelize.define('course', {
-    courseName: DataTypes.STRING
+    courseName: DataTypes.STRING,
+    courseId: DataTypes.STRING,
   }, {});
   course.associate = function(models) {
     course.belongsToMany(models.user, {
