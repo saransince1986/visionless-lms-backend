@@ -7,8 +7,28 @@ export default class UsersManagerService {
     this.roleModel = roleModel;
   }
 
-  createUser(data) {
-    return this.userModel.create(data);
+  createUser({
+    email,
+    phoneNumber,
+    authId,
+    firstName,
+    middleName,
+    lastName,
+    secondLastName,
+    idNumber,
+    disabilites,
+  }) {
+    return this.userModel.create({
+      email,
+      phoneNumber,
+      authId,
+      firstName,
+      middleName,
+      lastName,
+      secondLastName,
+      idNumber,
+      disabilites,
+    });
   }
 
   getAllUsers() {
