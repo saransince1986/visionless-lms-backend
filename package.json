@@ -10,12 +10,15 @@
     "migrations": "sequelize db:migrate --config=src/config/sequelize.js --migrations-path=src/migrations",
     "create-db": "sequelize db:create --config=src/config/sequelize.js",
     "build": "babel src --out-dir dist --source-maps inline --copy-files",
-    "prestart": "npm run build",
+    "prestart": "npm run lint && npm run build",
     "start": "node ./dist/server.js",
+    "dev": "nodemon --exec npm start",
     "migrations-prod": "sequelize db:migrate --config dist/config/sequelize.js --migrations-path=dist/migrations"
   },
   "keywords": [
-    "LMS"
+    "LMS",
+    "Honduras",
+    "Disability"
   ],
   "author": "Cesar Bonilla",
   "license": "ISC",
@@ -75,5 +78,9 @@
       "git add"
     ]
   },
-  "pre-commit": "lint:staged"
+  "pre-commit": "lint:staged",
+  "nodemonConfig": {
+    "ignore": [ "test/*", "dist/*", "package.json" ],
+    "delay": "2500"
+  }
 }
