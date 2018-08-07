@@ -36,11 +36,7 @@ export default class UsersManagerService {
   }
 
   getUserById(id) {
-    return this.userModel.findById(id, {
-      include: {
-        model: this.roleModel,
-      },
-    });
+    return this.userModel.findById(id);
   }
 
   deleteUserById(id) {

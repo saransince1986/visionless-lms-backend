@@ -8,7 +8,6 @@ router.get('/', (req, res) => {
 });
 const v1Router = express.Router();
 v1Router.use('/roles', container.resolve('rolesRouter'));
-v1Router.use('/users', container.resolve('usersRouter'));
 v1Router.use('/courses', container.resolve('coursesRouter'));
 
 router.use('/api/v1', v1Router);
