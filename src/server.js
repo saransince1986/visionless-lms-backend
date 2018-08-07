@@ -1,21 +1,47 @@
-import express from 'express';
-import bodyParser from 'body-parser';
-import morgan from 'morgan';
-import routes from './routes';
+import Hapi from 'hapi';
+import Inert from 'inert';
+import Vision from 'vision';
+import HapiSwagger from 'hapi-swagger';
 
-const PORT = process.env.PORT || '8080';
-const HOST = process.env.HOST || '0.0.0.0';
-const app = express();
+import Pack from '../package.json';
+import { loadRoutes } from './hapi_routes/index';
 
-app.use(morgan('tiny'));
-app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: true }));
-app.use('/', routes);
-app.use((err, req, res, next) => {
-  if (err.isBoom) {
-    res.status(err.output.statusCode).send(err.output.payload);
+const routes = loadRoutes();
+
+const init = async () => {
+  const server = await Hapi.server({
+    port: 3000,
+    host: 'localhost',
+  });
+
+  const swaggerOptions = {
+    info: {
+      title: 'Bencaleth LMS API Documentation',
+      version: Pack.version,
+    },
+  };
+
+  await server.register([
+    Inert,
+    Vision,
+    {
+      plugin: HapiSwagger,
+      options: swaggerOptions,
+    },
+  ]);
+  try {
+    await server.start();
+    server.route(routes);
+  } catch (err) {
+    console.error(err);
   }
-  next(err);
+
+  console.log(`Server running at: ${server.info.uri}`);
+};
+
+process.on('unhandledRejection', (err) => {
+  console.log(err);
+  process.exit(1);
 });
-app.listen(PORT, HOST);
-console.log(`Running on http://${HOST}:${PORT}`);
+
+init();
