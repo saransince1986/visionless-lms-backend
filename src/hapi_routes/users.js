@@ -8,28 +8,19 @@ export default [
   {
     method: 'GET',
     path: '/users',
-    handler() {
-      return usersRequestHandler.getAllUsers()
-        .then((users) => users || [])
-        .catch(console.error.bind(console));
-    },
     config: {
       tags: ['api'],
       description: 'Get all users',
+      handler() {
+        return usersRequestHandler.getAllUsers()
+          .then((users) => users || [])
+          .catch(console.error.bind(console));
+      },
     },
   },
   {
     method: 'GET',
     path: '/users/{userId}',
-    async handler(request, h) {
-      const userId = request.params.userId;
-      return usersRequestHandler.getUserById(userId).then((user) => {
-        if (isEmpty(user)) {
-          return h.response({}).code(404);
-        }
-        return user;
-      });
-    },
     config: {
       tags: ['api'],
       description: 'Get a specific user by ID',
@@ -38,27 +29,23 @@ export default [
           userId: Joi.number().integer().required().description('User numeric ID'),
         },
       },
+      async handler(request, h) {
+        const userId = request.params.userId;
+        return usersRequestHandler.getUserById(userId).then((user) => {
+          if (isEmpty(user)) {
+            return h.response({}).code(404);
+          }
+          return user;
+        }).catch((error) => {
+          console.error(error);
+          return h.response(error).code(500);
+        });
+      },
     },
   },
   {
     method: 'POST',
     path: '/users',
-    async handler(request, h) {
-      const userData = request.payload;
-      return usersRequestHandler.createUser({
-        email: userData.email,
-        phoneNumber: userData.phoneNumber,
-        authId: userData.authId,
-        firstName: userData.firstName,
-        middleName: userData.middleName,
-        lastName: userData.lastName,
-        secondLastName: userData.secondLastName,
-        idNumber: userData.idNumber,
-      }).catch((error) => {
-        console.error(error);
-        return h.response(error.message).code(500);
-      });
-    },
     config: {
       tags: ['api'],
       description: 'Create a new user',
@@ -81,6 +68,44 @@ export default [
             .example('0801199012458'),
           disabilities: Joi.array().description('Disabilities the user has'),
         },
+      },
+      async handler(request, h) {
+        const userData = request.payload;
+        return usersRequestHandler.createUser({
+          email: userData.email,
+          phoneNumber: userData.phoneNumber,
+          authId: userData.authId,
+          firstName: userData.firstName,
+          middleName: userData.middleName,
+          lastName: userData.lastName,
+          secondLastName: userData.secondLastName,
+          idNumber: userData.idNumber,
+        }).catch((error) => {
+          console.error(error);
+          return h.response(error.message).code(500);
+        });
+      },
+    },
+  },
+  {
+    method: 'DELETE',
+    path: '/users/{userId}',
+    config: {
+      tags: ['api'],
+      description: 'Delete a user by its Id',
+      validate: {
+        params: {
+          userId: Joi.number().integer().required(),
+        },
+      },
+      handler(request, h) {
+        const userId = request.params.userId;
+        return usersRequestHandler.deleteUserById(userId)
+          .then(() => h.response('OK').code(204))
+          .catch((error) => {
+            console.error(error);
+            return h.response(error).code(500);
+          });
       },
     },
   },
