@@ -1,4 +1,4 @@
-import { createContainer, Lifetime, asValue, asClass, asFunction } from 'awilix';
+import { createContainer, Lifetime, asValue, asClass } from 'awilix';
 import db from '../models';
 
 const container = createContainer();
@@ -14,22 +14,6 @@ container.loadModules([`${__dirname}/../domain/request-handlers/!(index).js`], {
   resolverOptions: {
     lifetime: Lifetime.SINGLETON,
     register: asClass,
-  },
-});
-
-container.loadModules([`${__dirname}/../routes/!(index).js`], {
-  formatName: (name) => `${name}Router`,
-  resolverOptions: {
-    lifetime: Lifetime.SINGLETON,
-    register: asFunction,
-  },
-});
-
-container.loadModules([`${__dirname}/../domain/joi-validators/!(index).js`], {
-  formatName: (name) => `${name}SchemaValidator`,
-  resolverOptions: {
-    lifetime: Lifetime.SINGLETON,
-    register: asFunction,
   },
 });
 

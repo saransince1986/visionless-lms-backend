@@ -1,10 +1,8 @@
 export default class UsersManagerService {
   constructor({
     userModel,
-    roleModel,
   }) {
     this.userModel = userModel;
-    this.roleModel = roleModel;
   }
 
   createUser({

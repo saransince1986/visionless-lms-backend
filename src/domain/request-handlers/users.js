@@ -1,10 +1,8 @@
 export default class UsersRequestHandler {
   constructor({
     usersManagerService,
-    rolesManagerService,
   }) {
     this.usersManagerService = usersManagerService;
-    this.rolesManagerService = rolesManagerService;
   }
 
   async createUser(data) {
