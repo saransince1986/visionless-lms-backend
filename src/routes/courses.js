@@ -9,7 +9,7 @@ export default [
     path: '/courses',
     config: {
       tags: ['api'],
-      description: 'List all courses(50 at a time)',
+      description: 'List courses',
       handler(request, h) {
         return coursesRequestHandler.getAllCourses()
           .catch((error) => {

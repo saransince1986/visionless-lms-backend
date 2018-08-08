@@ -4,14 +4,14 @@ import Vision from 'vision';
 import HapiSwagger from 'hapi-swagger';
 
 import Pack from '../package.json';
-import { loadRoutes } from './hapi_routes/index';
+import { loadRoutes } from './routes/index';
 
 const routes = loadRoutes();
 
 const init = async () => {
   const server = await Hapi.server({
-    port: 3000,
-    host: 'localhost',
+    port: process.env.PORT || '8080',
+    host: process.env.HOST || '0.0.0.0',
   });
 
   const swaggerOptions = {

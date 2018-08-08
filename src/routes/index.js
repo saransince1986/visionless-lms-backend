@@ -1,16 +1,18 @@
-import express from 'express';
-import container from '../config/awilixContainer';
+const normalizedPath = require('path').join(__dirname);
 
-const router = express.Router();
-
-router.get('/', (req, res) => {
-  res.send('Hello World');
-});
-const v1Router = express.Router();
-v1Router.use('/roles', container.resolve('rolesRouter'));
-v1Router.use('/courses', container.resolve('coursesRouter'));
-
-router.use('/api/v1', v1Router);
-
-export default router;
-
+export function loadRoutes() {
+  const routes = [];
+  require('fs') // eslint-disable-line global-require
+    .readdirSync(normalizedPath)
+    .forEach((file) => {
+      console.log('File: ', file);
+      if (file !== 'index.js') {
+        // eslint-disable-next-line import/no-dynamic-require, global-require
+        const routesFile = require(`./${file}`).default;
+        routesFile.forEach((route) => {
+          routes.push(route);
+        });
+      }
+    });
+  return routes;
+}
