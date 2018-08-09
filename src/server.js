@@ -4,9 +4,7 @@ import Vision from 'vision';
 import HapiSwagger from 'hapi-swagger';
 
 import Pack from '../package.json';
-import { loadRoutes } from './routes/index';
-
-const routes = loadRoutes();
+import routes from './routes/index';
 
 const init = async () => {
   const server = await Hapi.server({

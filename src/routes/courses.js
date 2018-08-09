@@ -20,6 +20,28 @@ export default [
     },
   },
   {
+    method: 'GET',
+    path: '/courses/{id}',
+    config: {
+      tags: ['api'],
+      description: 'Get course by ID',
+      validate: {
+        params: {
+          id: Joi.number().integer().required(),
+        },
+      },
+      handler(request, h) {
+        const courseId = request.params.id;
+        return coursesRequestHandler.getCourseById(courseId)
+          .then((course) => course || h.response().code(404))
+          .catch((error) => {
+            console.error(error);
+            return h.response(error.message).code(500);
+          });
+      },
+    },
+  },
+  {
     method: 'POST',
     path: '/courses',
     config: {
@@ -44,6 +66,28 @@ export default [
           console.error(error);
           return h.response(error.message).code(500);
         });
+      },
+    },
+  },
+  {
+    method: 'DELETE',
+    path: '/courses/{id}',
+    config: {
+      tags: ['api'],
+      description: 'Delete a course',
+      validate: {
+        params: {
+          id: Joi.number().integer().required(),
+        },
+      },
+      handler(request, h) {
+        const id = request.params.id;
+        return coursesRequestHandler.deleteCourseById(id)
+          .then(() => h.response('OK').code(200))
+          .catch((error) => {
+            console.error(error);
+            return h.response(error.message).code(500);
+          });
       },
     },
   },

@@ -15,4 +15,12 @@ export default class CoursesManagerService {
   createCourse(course) {
     return this.courseModel.create(course);
   }
+
+  deleteById(courseId) {
+    return this.courseModel.destroy({
+      where: {
+        id: courseId,
+      },
+    });
+  }
 }
