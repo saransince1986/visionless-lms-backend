@@ -9,7 +9,7 @@ import routes from './routes/index';
 const init = async () => {
   const server = await Hapi.server({
     port: process.env.PORT || '8080',
-    host: process.env.HOST || '0.0.0.0',
+    host: process.env.HOST || 'localhost',
   });
 
   const swaggerOptions = {
@@ -17,6 +17,7 @@ const init = async () => {
       title: 'Bencaleth LMS API Documentation',
       version: Pack.version,
     },
+    documentationPath: '/',
   };
 
   await server.register([
