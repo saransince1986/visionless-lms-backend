@@ -7,8 +7,15 @@ export default class CoursesRequestHandler {
     return this.coursesManagerService.getAllCourses();
   }
 
-  createCourse({ courseId, courseName }) {
-    return this.coursesManagerService.createCourse({ courseId, courseName });
+  createCourse(request, h) {
+    const payload = request.payload;
+    return this.coursesManagerService.createCourse({
+      courseId: payload.courseId,
+      courseName: payload.courseName,
+    }).catch((error) => {
+      console.error(error);
+      return h.response(error.message).code(500);
+    });
   }
 
   getCourseById(courseId) {
@@ -17,5 +24,11 @@ export default class CoursesRequestHandler {
 
   deleteCourseById(courseId) {
     return this.coursesManagerService.deleteById(courseId);
+  }
+
+  getCourseSections(request, h) {
+    const courseId = request.params.id;
+    return this.coursesManagerService.getCourseSections(courseId)
+      .catch((error) => h.response(error.message).code(500));
   }
 }

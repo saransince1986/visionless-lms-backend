@@ -23,4 +23,8 @@ export default class CoursesManagerService {
       },
     });
   }
+
+  getCourseSections(courseId) {
+    return this.getCourseById(courseId).then((course) => course.getSections());
+  }
 }

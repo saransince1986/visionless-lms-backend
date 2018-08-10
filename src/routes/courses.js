@@ -42,6 +42,20 @@ export default [
     },
   },
   {
+    method: 'GET',
+    path: '/courses/{id}/sections',
+    config: {
+      tags: ['api'],
+      description: 'Get course by ID',
+      validate: {
+        params: {
+          id: Joi.number().integer().required(),
+        },
+      },
+      handler: coursesRequestHandler.getCourseSections.bind(coursesRequestHandler),
+    },
+  },
+  {
     method: 'POST',
     path: '/courses',
     config: {
@@ -57,16 +71,7 @@ export default [
             .example('Matematicas 1er grado'),
         },
       },
-      handler(request, h) {
-        const payload = request.payload;
-        return coursesRequestHandler.createCourse({
-          courseId: payload.courseId,
-          courseName: payload.courseName,
-        }).catch((error) => {
-          console.error(error);
-          return h.response(error.message).code(500);
-        });
-      },
+      handler: coursesRequestHandler.createCourse.bind(coursesRequestHandler),
     },
   },
   {
