@@ -44,6 +44,20 @@ export default [
     },
   },
   {
+    method: 'GET',
+    path: '/users/{userId}/courses',
+    config: {
+      tags: ['api'],
+      description: 'Get user enrollments',
+      validate: {
+        params: {
+          userId: Joi.number().integer().required().description('User numeric ID'),
+        },
+      },
+      handler: usersRequestHandler.getUserEnrollmentsByUserId.bind(usersRequestHandler),
+    },
+  },
+  {
     method: 'POST',
     path: '/users',
     config: {

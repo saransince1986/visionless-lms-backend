@@ -44,4 +44,8 @@ export default class UsersManagerService {
       },
     });
   }
+
+  getUserEnrollmentsByUserId(userId) {
+    return this.getUserById(userId).then((user) => user.getCourses());
+  }
 }

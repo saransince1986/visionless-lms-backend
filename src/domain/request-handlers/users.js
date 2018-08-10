@@ -5,7 +5,7 @@ export default class UsersRequestHandler {
     this.usersManagerService = usersManagerService;
   }
 
-  async createUser(data) {
+  createUser(data) {
     return this.usersManagerService.createUser(data);
   }
 
@@ -19,5 +19,11 @@ export default class UsersRequestHandler {
 
   getAllUsers() {
     return this.usersManagerService.getAllUsers();
+  }
+
+  getUserEnrollmentsByUserId(request, h) { // eslint-disable-line
+    const userId = request.params.userId;
+    return this.usersManagerService.getUserEnrollmentsByUserId(userId)
+      .catch((error) => h.response(error.message).code(500));
   }
 }
