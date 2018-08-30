@@ -1,5 +1,6 @@
 import { createContainer, Lifetime, asValue, asClass } from 'awilix';
 import db from '../models';
+import courseSectionTypes from '../domain/data/courseSectionTypes';
 
 const container = createContainer();
 
@@ -24,5 +25,7 @@ container.loadModules([`${__dirname}/../domain/services/*.js`], {
     register: asClass,
   },
 });
+
+container.register('courseSectionTypes', asValue(courseSectionTypes));
 
 export default container;
